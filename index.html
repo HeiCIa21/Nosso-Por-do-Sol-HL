@@ -75,6 +75,71 @@
         </div>
     </section>
 
+    <!-- Carrossel de Fotos - Comemoração do Primeiro Mês -->
+    <section id="carrossel" class="section-padding carrossel-section" aria-label="Carrossel de fotos">
+        <div class="container">
+            <div class="celebracao-header">
+                <h2 class="celebracao-title">🎉 Comemoração do Nosso Primeiro Mês! ❤️</h2>
+                <div class="celebracao-subtitle">Mais um mês juntos, minha nega!</div>
+                <div class="contador-mensal">
+                    <span id="mesesJuntos">1</span> mês de namoro
+                </div>
+            </div>
+            
+            <div class="carrossel-container" 
+                 role="region" 
+                 aria-label="Carrossel de fotos dos nossos momentos"
+                 aria-roledescription="carousel">
+                
+                <!-- Container principal -->
+                <div class="carrossel-viewport" 
+                     tabindex="0"
+                     aria-live="polite">
+                    <div class="carrossel-track">
+                        <!-- Slides serão inseridos via JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Navegação -->
+                <div class="carrossel-nav">
+                    <button class="carrossel-btn prev" aria-label="Foto anterior">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                        </svg>
+                    </button>
+                    
+                    <div class="carrossel-indicators" role="tablist" aria-label="Selecionar foto">
+                        <!-- Indicadores serão gerados via JS -->
+                    </div>
+                    
+                    <button class="carrossel-btn next" aria-label="Próxima foto">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Instruções para diferentes dispositivos -->
+                <div class="carrossel-instructions">
+                    <p class="desktop-instruction">
+                        💡 <strong>Dica:</strong> Clique na foto, use as setas ← → ou as teclas Espaço/Enter
+                    </p>
+                    <p class="mobile-instruction">
+                        👆 Toque para avançar ou deslize para os lados
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Contador para próximo dia 02 -->
+            <div class="proximo-dois">
+                <h3>Próximo dia 02 em:</h3>
+                <div class="contador-proximo">
+                    <span id="diasRestantes">0</span> dias
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contador Section -->
     <section id="contador" class="section-padding contador-section">
         <div class="container">
@@ -319,6 +384,8 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/carousel.js" defer></script>
 </body>
 </html>
