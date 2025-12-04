@@ -500,6 +500,8 @@ const init = () => {
     initLazyImages();
     initErrorHandling();
     initContador();
+    initCelebracaoDia02();
+    initCarrossel();
     
     // Log para debug
     console.log('✅ Todas as funcionalidades carregadas');
@@ -547,6 +549,42 @@ const initContador = () => {
 
     update();
     setInterval(update, 1000);
+};
+
+// ==========================================
+// CELEBRAÇÃO DIA 02 - INTEGRAÇÃO
+// ==========================================
+const initCelebracaoDia02 = () => {
+    // Verificar se hoje é dia 02
+    const hoje = new Date();
+    if (hoje.getDate() !== 2) return;
+    
+    // Adicionar CSS da celebração
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'assets/css/celebracao.css';
+    document.head.appendChild(link);
+    
+    // Inicializar após um breve delay para garantir DOM
+    setTimeout(() => {
+        if (typeof initTwoDayCelebration === 'function') {
+            initTwoDayCelebration();
+        }
+    }, 100);
+};
+
+// ==========================================
+// CARROSSEL - INTEGRAÇÃO
+// ==========================================
+const initCarrossel = () => {
+    // Adicionar CSS do carrossel
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'assets/css/carousel.css';
+    document.head.appendChild(link);
+    
+    // O carrossel.js é carregado separadamente e se auto-inicializa
+    console.log('🎠 Carrossel inicializado');
 };
 
 // Executar inicialização
