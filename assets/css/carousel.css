@@ -1,0 +1,501 @@
+/* ==========================================
+   CARROSSEL - COMEMORAÇÃO DO PRIMEIRO MÊS
+   ========================================== */
+.carrossel-section {
+    background: linear-gradient(135deg, rgba(255, 111, 97, 0.1), rgba(255, 154, 139, 0.1));
+    position: relative;
+    overflow: hidden;
+}
+
+.carrossel-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--sunset-orange), 
+        var(--sunset-pink), 
+        transparent
+    );
+}
+
+.carrossel-section::after {
+    content: '❤️';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+}
+
+.celebracao-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    z-index: 2;
+}
+
+.celebracao-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    background: linear-gradient(135deg, var(--sunset-orange), var(--sunset-pink), var(--sky-lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+}
+
+.celebracao-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--sunset-orange), 
+        var(--sunset-pink), 
+        transparent
+    );
+    border-radius: 2px;
+}
+
+.celebracao-subtitle {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    font-weight: 500;
+}
+
+.contador-mensal {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--sunset-orange), var(--sunset-pink));
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(255, 111, 97, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.contador-mensal span {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* Container do carrossel */
+.carrossel-container {
+    background: var(--white);
+    border-radius: 20px;
+    padding: var(--spacing-lg);
+    box-shadow: 0 16px 48px var(--shadow-strong);
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 111, 97, 0.1);
+}
+
+.carrossel-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 111, 97, 0.05) 0%, transparent 70%);
+    z-index: 1;
+}
+
+/* Viewport do carrossel */
+.carrossel-viewport {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, var(--off-white), var(--white));
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+/* Trilha do carrossel */
+.carrossel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Slides individuais */
+.carrossel-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+}
+
+.carrossel-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 32px var(--shadow-strong);
+}
+
+.carrossel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carrossel-slide:hover .carrossel-image img {
+    transform: scale(1.05);
+}
+
+.carrossel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: var(--white);
+    padding: 1.5rem 1rem 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.carrossel-slide:hover .carrossel-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Navegação do carrossel */
+.carrossel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    z-index: 2;
+    position: relative;
+}
+
+.carrossel-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sunset-orange), var(--sunset-pink));
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(255, 111, 97, 0.3);
+}
+
+.carrossel-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(255, 111, 97, 0.5);
+}
+
+.carrossel-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Indicadores */
+.carrossel-indicators {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.carrossel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--sky-lavender);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.carrossel-indicator.active {
+    background: var(--sunset-orange);
+    transform: scale(1.2);
+}
+
+.carrossel-indicator:hover {
+    background: var(--sunset-pink);
+    transform: scale(1.1);
+}
+
+/* Instruções */
+.carrossel-instructions {
+    text-align: center;
+    margin-top: var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-light);
+    z-index: 2;
+    position: relative;
+}
+
+.desktop-instruction,
+.mobile-instruction {
+    display: none;
+}
+
+@media (min-width: 769px) {
+    .desktop-instruction {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-instruction {
+        display: block;
+    }
+    
+    .carrossel-viewport {
+        height: 300px;
+    }
+}
+
+/* Contador para próximo dia 02 */
+.proximo-dois {
+    background: linear-gradient(135deg, var(--sky-blue), var(--sky-lavender));
+    padding: var(--spacing-lg);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 12px 36px rgba(142, 197, 252, 0.3);
+    margin-top: var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.proximo-dois::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="50" font-size="20" fill="rgba(255,255,255,0.1)" text-anchor="middle" dominant-baseline="middle">02</text></svg>');
+    opacity: 0.1;
+}
+
+.proximo-dois h3 {
+    color: var(--white);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.contador-proximo {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--white);
+    font-family: var(--font-heading);
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.contador-proximo span {
+    animation: countPulse 2s ease-in-out infinite;
+}
+
+@keyframes countPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Confetes canvas */
+.confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ==========================================
+   RESPONSIVIDADE DO CARROSSEL
+   ========================================== */
+@media (max-width: 480px) {
+    .celebracao-title {
+        font-size: 2rem;
+    }
+    
+    .celebracao-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .contador-mensal {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .carrossel-viewport {
+        height: 250px;
+    }
+    
+    .carrossel-container {
+        padding: var(--spacing-md);
+    }
+    
+    .contador-proximo {
+        font-size: 2rem;
+    }
+}
+
+/* ==========================================
+   ANIMAÇÕES ESPECIAIS
+   ========================================== */
+@keyframes celebrate {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.carrossel-section {
+    animation: celebrate 0.8s ease-out;
+}
+
+/* ==========================================
+   EFEITOS DE FOCO
+   ========================================== */
+.carrossel-viewport:focus {
+    outline: 3px solid var(--sunset-orange);
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   LOADING DO CARROSSEL
+   ========================================== */
+.carrossel-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.carrossel-loading::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--sky-lavender);
+    border-top-color: var(--sunset-orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================
+   ESTILOS ESPECIAIS PARA O CONTADOR DE 29 DIAS
+   ========================================== */
+
+.aviso-dias {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--sunset-orange);
+    padding: 8px 12px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--sunset-orange);
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Destaque para o número 29 */
+.contador-proximo span[data-dias="29"] {
+    color: var(--sunset-orange);
+    text-shadow: 0 0 10px rgba(148, 37, 27, 0.3);
+    position: relative;
+}
+
+.contador-proximo span[data-dias="29"]::after {
+    content: '✨';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.2rem;
+    animation: twinkle 1.5s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* ==========================================
+   ANIMAÇÃO ESPECIAL PARA A CELEBRAÇÃO
+   ========================================== */
+
+.celebrando {
+    position: relative;
+    overflow: hidden;
+}
+
+.celebrando::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, 
+        rgba(255, 111, 97, 0.1) 0%, 
+        rgba(255, 195, 113, 0.05) 30%, 
+        transparent 70%);
+    animation: rotate 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
