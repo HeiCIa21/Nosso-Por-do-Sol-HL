@@ -1032,3 +1032,35 @@ button {
         gap: 0.75rem;
     }
 }
+
+/* Safe area para iPhone X e superiores */
+@supports (padding: max(0px)) {
+    .hero, 
+    #celebracao-dois,
+    .modal,
+    .share-sheet {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+}
+
+/* Correção para safari iOS */
+input, textarea, select, button {
+    font-size: 16px; /* Prevenir zoom em inputs no iOS */
+}
+
+/* Melhorar toque em elementos interativos */
+button, 
+.btn-foto, 
+.btn-celebracao,
+.foto-slot {
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Prevenir highlight azul no iOS */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
